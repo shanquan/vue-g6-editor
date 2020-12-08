@@ -7,6 +7,7 @@ class command {
         this.editor = editor;
     }
     executeCommand(key, datas) {
+        console.log(key, datas)
         const list = []
         datas.map(data => {
             let model = data
@@ -37,8 +38,8 @@ class command {
 
         });
         this.undoList.push({ key, datas: list })
-        if(key==='delete'){
-            this.redoList =[]
+        if (key === 'delete') {
+            this.redoList = []
         }
         this.editor.emit(key, { undoList: this.undoList, redoList: this.redoList })
     }

@@ -83,7 +83,6 @@ export default {
       const model = {
         label: e
       };
-
       this.graph.update(this.item, model);
     },
     changeGridState(value) {

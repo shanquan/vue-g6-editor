@@ -98,15 +98,15 @@ const customNode = {
         }
         if (cfg.inPoints) {
           for (let i = 0; i < cfg.inPoints.length; i++) {
-            let x,
+            let x = 0,
               y = 0;
-            //0为顶 1为底
-            if (cfg.inPoints[i][0] === 0) {
-              y = 0;
-            } else {
-              y = height;
+            //0为顶 1为底 2为左边 3为右边, inPoints: 0,2
+            switch(cfg.inPoints[i][0]){
+              case 0: x = width * cfg.inPoints[i][1];break;
+              case 1: y = height;x = width * cfg.inPoints[i][1];break;
+              case 2: y = height * cfg.inPoints[i][1];break;
+              case 3: x = width;y= height * cfg.inPoints[i][1];break;
             }
-            x = width * cfg.inPoints[i][1];
             const id = 'circle' + uniqueId()
             group.addShape("circle", {
               attrs: {
@@ -136,15 +136,15 @@ const customNode = {
         }
         if (cfg.outPoints) {
           for (let i = 0; i < cfg.outPoints.length; i++) {
-            let x,
+            let x = 0,
               y = 0;
-            //0为顶 1为底
-            if (cfg.outPoints[i][0] === 0) {
-              y = 0;
-            } else {
-              y = height;
+            //0为顶 1为底 2为左边 3为右边, outPoints: 1,3
+            switch(cfg.outPoints[i][0]){
+              case 0: x = width * cfg.outPoints[i][1];break;
+              case 1: y = height;x = width * cfg.outPoints[i][1];break;
+              case 2: y= height * cfg.outPoints[i][1];break;
+              case 3: x = width;y= height * cfg.outPoints[i][1];break;
             }
-            x = width * cfg.outPoints[i][1];
             const id = 'circle' + uniqueId()
             group.addShape("circle", {
               attrs: {

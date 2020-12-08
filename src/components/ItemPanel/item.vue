@@ -19,8 +19,8 @@
 
 <script>
 import eventBus from "@/utils/eventBus";
-import okSvg from "@/assets/icons/ok.svg";
 import bgImg from "@/assets/bg.jpg";
+const SIZE="170*34";
 export default {
   data() {
     return {
@@ -32,97 +32,132 @@ export default {
         {
           name: "测试节点",
           label: "测试节点",
-          size: "170*34",
+          size: SIZE,
           type: "node",
           x: 0,
           y: 0,
           shape: "customNode",
           color: "#1890ff",
-          image:
-            "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
-          stateImage: okSvg,
+          image: "images/start.svg",
+          stateImage: "images/ok.svg",
           inPoints: [[0, 0.5]],
           outPoints: [[1, 0.5]]
         },
-
         {
-          name: "背景图片节点",
-          label: "背景图片节点",
-          size: "170*34",
+          name: "纵向节点",
+          label: "纵向节点",
+          size: SIZE,
           type: "node",
           x: 0,
           y: 0,
           shape: "customNode",
           color: "#1890ff",
-          image:
-            "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
-          stateImage: okSvg,
-          backImage: bgImg,
+          image: "images/ellipsis-vertical-outline.svg",
           inPoints: [[0, 0.5]],
           outPoints: [[1, 0.5]]
+        },
+        {
+          name: "横向节点",
+          label: "横向节点",
+          size: SIZE,
+          type: "node",
+          x: 0,
+          y: 0,
+          shape: "customNode",
+          color: "#1890ff",
+          image: "images/ellipsis-horizontal-outline.svg",
+          inPoints: [[2, 0.5]],
+          outPoints: [[3, 0.5]]
         },
         {
           name: "双输出节点",
           label: "双输出节点",
-          size: "170*34",
+          size: SIZE,
           type: "node",
           x: 0,
           y: 0,
           shape: "customNode",
           color: "#1890ff",
-          image:
-            "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
-          stateImage: okSvg,
+          image:"images/branch-outline.svg",
           inPoints: [[0, 0.5]],
           outPoints: [[1, 0.4], [1, 0.6]]
         },
         {
-          name: "大型节点",
-          label: "大型节点",
-          size: "340*34",
+          name: "全方节点",
+          label: "全方节点",
+          size: SIZE,
           type: "node",
           x: 0,
           y: 0,
           shape: "customNode",
           color: "#1890ff",
-          image:
-            "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
-          stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]]
-        },
-        {
-          name: "动画开始节点",
-          label: "动画开始",
-          size: "170*34",
-          type: "node",
-          x: 0,
-          y: 0,
-          shape: "customNode",
-          color: "#1890ff",
-          image:
-            "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
-          stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]],
-          isDoingStart: true
-        },
-        {
-          name: "动画结束节点",
-          label: "动画结束",
-          size: "170*34",
-          type: "node",
-          x: 0,
-          y: 0,
-          shape: "customNode",
-          color: "#1890ff",
-          image:
-            "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
-          stateImage: okSvg,
-          inPoints: [[0, 0.5]],
-          outPoints: [[1, 0.5]],
-          isDoingEnd: true
+          image: "images/move-outline.svg",
+          inPoints: [[0, 0.5],[2, 0.5]], //[[0, 0.5],[1, 0.5],[2, 0.5],[3, 0.5]]
+          outPoints: [[1, 0.5], [3, 0.5]]
         }
+        // ,{
+        //   name: "背景图片节点",
+        //   label: "背景图片节点",
+        //   size: "170*34",
+        //   type: "node",
+        //   x: 0,
+        //   y: 0,
+        //   shape: "customNode",
+        //   color: "#1890ff",
+        //   image:
+        //     "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
+        //   stateImage: okSvg,
+        //   backImage: bgImg,
+        //   inPoints: [[0, 0.5]],
+        //   outPoints: [[1, 0.5]]
+        // },
+        // {
+        //   name: "大型节点",
+        //   label: "大型节点",
+        //   size: "340*34",
+        //   type: "node",
+        //   x: 0,
+        //   y: 0,
+        //   shape: "customNode",
+        //   color: "#1890ff",
+        //   image:
+        //     "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
+        //   stateImage: okSvg,
+        //   inPoints: [[0, 0.5]],
+        //   outPoints: [[1, 0.5]]
+        // },
+        // {
+        //   name: "动画开始节点",
+        //   label: "动画开始",
+        //   size: "170*34",
+        //   type: "node",
+        //   x: 0,
+        //   y: 0,
+        //   shape: "customNode",
+        //   color: "#1890ff",
+        //   image:
+        //     "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
+        //   stateImage: okSvg,
+        //   inPoints: [[0, 0.5]],
+        //   outPoints: [[1, 0.5]],
+        //   isDoingStart: true
+        // },
+        // {
+        //   name: "动画结束节点",
+        //   label: "动画结束",
+        //   size: "170*34",
+        //   type: "node",
+        //   x: 0,
+        //   y: 0,
+        //   shape: "customNode",
+        //   color: "#1890ff",
+        //   image:
+        //     "https://gw.alipayobjects.com/zos/rmsportal/czNEJAmyDpclFaSucYWB.svg",
+        //   stateImage: okSvg,
+        //   inPoints: [[0, 0.5]],
+        //   outPoints: [[1, 0.5]],
+        //   isDoingEnd: true
+        // }
       ]
     };
   },

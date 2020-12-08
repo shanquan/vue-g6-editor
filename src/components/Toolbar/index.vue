@@ -27,6 +27,12 @@
       :class="selectedItem?'':'disable'"
       @click="handleDelete"
     ></i>
+    <i
+      data-command="clear"
+      class="command el-icon-close"
+      title="清空"
+      @click="handleClear"
+    ></i>
     <span class="separator"></span>
     <i
       data-command="zoomIn"
@@ -85,12 +91,14 @@
     ></i>
     <i data-command="unGroup" class="command iconfont icon-ungroup disable" title="解组"></i>
     <el-button @click="consoleData" type="primary">控制台输出数据</el-button>
+    <el-button @click="loadData" type="primary">加载模型数据</el-button>
   </div>
 </template>
 
 <script>
 import eventBus from "@/utils/eventBus";
 import Util from "@antv/g6/src/util";
+import model from "./model";
 import { uniqueId, getBox } from "@/utils";
 export default {
   data() {
@@ -170,9 +178,15 @@ export default {
       if (this.redoList.length > 0) this.command.redo();
     },
     handleDelete() {
-      if (this.selectedItem.length > 0) {
+      if (this.selectedItem&&this.selectedItem.length > 0) {
         this.command.executeCommand("delete", this.selectedItem);
         this.selectedItem = null;
+      }
+    },
+    handleClear(){
+      let cf = confirm("请确认是否清空所有？")
+      if(cf){
+        this.graph.clear()
       }
     },
     getFormatPadding() {
@@ -299,6 +313,10 @@ export default {
 
     consoleData() {
       console.log(this.graph.save());
+    },
+    loadData(){
+      this.graph.data(model);
+      this.graph.render();
     }
   }
 };
@@ -321,6 +339,7 @@ export default {
 }
 .toolbar .command {
   box-sizing: border-box;
+  font-size: 16px;
   width: 27px;
   height: 27px;
   margin: 0px 6px;

@@ -1,7 +1,5 @@
 import G6 from "@antv/g6/build/g6";
 import { uniqueId } from '@/utils'
-import openSvg from '@/assets/icons/open.svg'
-import closeSvg from '@/assets/icons/close.svg'
 const teamNode = {
   init() {
     G6.registerNode("teamNode", {
@@ -45,7 +43,7 @@ const teamNode = {
             y: offsetY + 8,
             width: 16,
             height: 16,
-            img: closeSvg
+            img: "images/close.svg"
           }
         });
         // 添加文本、更多图形
