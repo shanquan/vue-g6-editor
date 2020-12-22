@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :class="mode?'edit':''">
     <div :id="pageId" class="graph-container" style="position: relative;"></div>
   </div>
 </template>
@@ -7,7 +7,7 @@
 
 <script>
 import G6 from "@antv/g6/build/g6";
-import { initBehavors } from "@/behavior";
+import { initBehavors } from "../behavior";
 export default {
   data() {
     return {
@@ -27,6 +27,10 @@ export default {
     data: {
       type: Object,
       default: () => {}
+    },
+    mode: {
+      type: Number,
+      default: 0
     }
   },
   created() {
@@ -37,9 +41,17 @@ export default {
       this.init();
     });
   },
+  watch:{
+    data(){
+      this.readData();
+    },
+    mode(){
+      this.setMode()
+    }
+  },
   methods: {
     init() {
-      const height =  this.height - 42 
+      const height =  this.height - 45
       const width =  this.width - 400
 
       this.graph = new G6.Graph({
@@ -60,18 +72,33 @@ export default {
           ],
           mulitSelect: ["mulit-select"],
           addEdge: ["add-edge"],
-          moveNode:[ "drag-item"]
+          moveNode:[ "drag-item"],
+          readOnly: [
+            "drag-canvas",
+            "zoom-canvas",
+            "select-node",
+            "hover-edge"
+          ]
         }
       });
       const { editor, command } = this.$parent;
       editor.emit("afterAddPage", { graph: this.graph, command });
-
+      this.setMode();
       this.readData();
     },
     readData() {
       let data = this.data;
-      if (data) {
+      if (data&&data.nodes&&data.nodes.length) {
         this.graph.read(data);
+      }else{
+        this.graph.clear()
+      }
+    },
+    setMode(){
+      if(this.mode){
+        this.graph.setMode('default');
+      }else{
+        this.graph.setMode('readOnly');
       }
     }
   }
@@ -80,7 +107,9 @@ export default {
 
 <style scoped>
 .page{
-  margin-left:200px;
   margin-right: 200px;
+}
+.page.edit{
+  margin-left:200px;
 }
 </style>

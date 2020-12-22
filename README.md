@@ -1,13 +1,10 @@
-![效果图](https://github.com/caoyu48/vue-g6-editor/blob/master/1.gif)
 # vue-g6-editor
 
-demo地址：http://62.234.69.136/
-G6文档   https://www.yuque.com/antv/g6
-
-这个是个基于阿里G6制作的modelFlow组件 g6版本为3.0，UI部分用了elementUI。
-由于公司需要，需要一个模型流程图编辑器，本来g6-editor是个不错的选择，但是调研之后发现
-g6-editor不开源，不得商用。嗝屁，只能自己尝试着用g6实现一个editor。代码写的比较丑，仅做参考使用，不喜勿喷~。
-
+fork自[vue-g6-editor](https://github.com/caoyu48/vue-g6-editor), 为内部系统集成新增如下内容：
+- mode设置只读和编辑模式，只读模式下只能修改节点信息，可在`flow_data.js`中设置`mode`;
+- 节点增加左右两个连接点，且每个连接点均可作为箭头起点和终点；
+- 组件文件目录调整，单一入口文件夹：`components/G6Editor`；
+- 模型数据和自定义节点可在组件中配置, 可从接口获取
 
 
 

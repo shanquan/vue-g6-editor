@@ -5,6 +5,7 @@
       type="text/css"
       href="//at.alicdn.com/t/font_598462_3xve1872wizzolxr.css"
     />
+    <span v-if="mode">
     <i
       class="command iconfont icon-undo"
       title="撤销"
@@ -34,6 +35,7 @@
       @click="handleClear"
     ></i>
     <span class="separator"></span>
+    </span>
     <i
       data-command="zoomIn"
       class="command iconfont icon-zoom-in-o"
@@ -59,6 +61,7 @@
       @click="handleResetZoom"
     ></i>
     <span class="separator"></span>
+    <span v-if="mode">
     <i
       data-command="toBack"
       class="command iconfont icon-to-back"
@@ -90,17 +93,23 @@
       @click="handleAddGroup"
     ></i>
     <i data-command="unGroup" class="command iconfont icon-ungroup disable" title="解组"></i>
-    <el-button @click="consoleData" type="primary">控制台输出数据</el-button>
-    <el-button @click="loadData" type="primary">加载模型数据</el-button>
+    </span>
+    <el-button @click="save" size="mini" type="primary">保存</el-button>
+    <!-- <el-button @click="$router.go(-1)" size="mini" type="primary">返回</el-button> -->
   </div>
 </template>
 
 <script>
-import eventBus from "@/utils/eventBus";
+import eventBus from "../utils/eventBus";
 import Util from "@antv/g6/src/util";
-import model from "./model";
-import { uniqueId, getBox } from "@/utils";
+import { uniqueId, getBox } from "../utils";
 export default {
+  props:{
+    mode: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
       page: {},
@@ -132,6 +141,10 @@ export default {
       const { editor, command } = this.$parent;
       this.editor = editor;
       this.command = command;
+    },
+    save(){
+      let model = this.graph.save();
+      eventBus.$emit('saveModel', model);
     },
     bindEvent() {
       let self = this;
@@ -184,10 +197,11 @@ export default {
       }
     },
     handleClear(){
-      let cf = confirm("请确认是否清空所有？")
-      if(cf){
+      this.$confirm('请确认是否清空所有绘制？', '提示', {
+        type: 'warning'
+      }).then(() => {
         this.graph.clear()
-      }
+      })
     },
     getFormatPadding() {
       return Util.formatPadding(this.graph.get("fitViewPadding"));
@@ -309,14 +323,6 @@ export default {
       // const edgeGroup = this.graph.get("edgeGroup");
       // edgeGroup.toFront();
       // this.graph.paint();
-    },
-
-    consoleData() {
-      console.log(this.graph.save());
-    },
-    loadData(){
-      this.graph.data(model);
-      this.graph.render();
     }
   }
 };
@@ -326,7 +332,7 @@ export default {
 <style scoped>
 .toolbar {
   box-sizing: border-box;
-  padding: 8px 0px;
+  padding: 8px 0px 8px 24px;
   width: 100%;
   border: 1px solid #e9e9e9;
   height: 42px;
@@ -334,9 +340,9 @@ export default {
   box-shadow: 0px 8px 12px 0px rgba(0, 52, 107, 0.04);
   position: absolute;
 }
-.toolbar .command:nth-of-type(1) {
+/* .toolbar .command:nth-of-type(1) {
   margin-left: 24px;
-}
+} */
 .toolbar .command {
   box-sizing: border-box;
   font-size: 16px;

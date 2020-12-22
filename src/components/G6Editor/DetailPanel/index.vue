@@ -7,11 +7,11 @@
           <el-row :gutter="10">
             <el-col :span="8">名称</el-col>
             <el-col :span="16">
-              <el-input v-model="node.label" @change="handleChangeName" />
+              <el-input v-model="node.label" size="small" @change="handleChangeName" />
             </el-col>
             <el-col :span="8">任意属性</el-col>
             <el-col :span="16">
-              <el-input v-model="node.xxx" />
+              <el-input v-model="node.xxx" size="small"/>
             </el-col>
           </el-row>
         </div>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import eventBus from "@/utils/eventBus";
+import eventBus from "../utils/eventBus";
 import Grid from "@antv/g6/build/grid";
 export default {
   data() {
@@ -52,7 +52,8 @@ export default {
       graph: {},
       item: {},
       node: {},
-      grid: null
+      grid: null,
+      processTypes:[{label:'L10306',value:0},{label:'L10307',value:1},{label:'L10308',value:2}]
     };
   },
   created() {
@@ -101,6 +102,8 @@ export default {
 .detailpannel {
   height: 100%;
   position: absolute;
+  /* top:0px;
+  bottom:0; */
   right: 0px;
   z-index: 2;
   background: #f7f9fb;

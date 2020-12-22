@@ -1,5 +1,5 @@
 import G6 from "@antv/g6/build/g6";
-import { uniqueId } from '@/utils'
+import { uniqueId } from '../utils'
 import Shape from '@antv/g/src/shapes'
 const customNode = {
   init() {
@@ -95,6 +95,40 @@ const customNode = {
               fill: "#565758"
             }
           });
+        }
+        // 未设置inPoints和outPoints
+        if(!cfg.inPoints&&!cfg.outPoints){
+          //let points = [[0,0],[width,0],[0,height],[width,height],[width * 0.5,0],[width * 0.5,height],[0,height * 0.5],[width,height * 0.5]];
+          let points = [[width * 0.5,0],[width * 0.5,height],[0,height * 0.5],[width,height * 0.5]]
+          points.forEach(el=>{
+            const id = 'circle' + uniqueId()
+            group.addShape("circle", {
+              attrs: {
+                id: 'circle' + uniqueId(),
+                parent: id,
+                x: el[0] + offsetX,
+                y: el[1] + offsetY,
+                r: 10,
+                isInPointOut: true,
+                isOutPointOut: true,
+                fill: "#1890ff",
+                opacity: 0
+              }
+            });
+            group.addShape("circle", {
+              attrs: {
+                id: id,
+                x: el[0] + offsetX,
+                y: el[1] + offsetY,
+                r: 3,
+                isInPoint: true,
+                isOutPoint: true,
+                fill: "#fff",
+                stroke: "#1890ff",
+                opacity: 0
+              }
+            });
+          })
         }
         if (cfg.inPoints) {
           for (let i = 0; i < cfg.inPoints.length; i++) {

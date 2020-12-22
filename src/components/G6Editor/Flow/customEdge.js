@@ -1,5 +1,5 @@
 import G6 from "@antv/g6/build/g6";
-import { uniqueId } from '@/utils'
+import { uniqueId } from '../utils'
 const MIN_ARROW_SIZE = 3
 
 const customEdge = {
@@ -58,15 +58,16 @@ const customEdge = {
         if (end.x > start.x) {
           path = [
             ['M', start.x, start.y],
-            [
-              'C',
-              start.x,
-              start.y + hgap / (hgap / 50),
-              end.x,
-              end.y - hgap / (hgap / 50),
-              end.x,
-              end.y - 4
-            ],
+            // 曲线
+            // [
+            //   'C',
+            //   start.x,
+            //   start.y + hgap / (hgap / 50),
+            //   end.x,
+            //   end.y - hgap / (hgap / 50),
+            //   end.x,
+            //   end.y - 4
+            // ],
             [
               'L',
               end.x,
@@ -76,15 +77,16 @@ const customEdge = {
         } else {
           path = [
             ['M', start.x, start.y],
-            [
-              'C',
-              start.x,
-              start.y + hgap / (hgap / 50),
-              end.x,
-              end.y - hgap / (hgap / 50),
-              end.x,
-              end.y - 4
-            ],
+            // 曲线
+            // [
+            //   'C',
+            //   start.x,
+            //   start.y + hgap / (hgap / 50),
+            //   end.x,
+            //   end.y - hgap / (hgap / 50),
+            //   end.x,
+            //   end.y - 4
+            // ],
             [
               'L',
               end.x,

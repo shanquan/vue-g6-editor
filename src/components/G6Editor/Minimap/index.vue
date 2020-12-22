@@ -13,7 +13,7 @@
 
 <script>
 import Minimap from "@antv/g6/build/minimap";
-import eventBus from "@/utils/eventBus";
+import eventBus from "../utils/eventBus";
 export default {
   data() {
     return {
@@ -55,7 +55,6 @@ export default {
 <style scoped>
 #navigator {
   width: 200px;
-  /* height: 176px; */
   position: absolute;
   bottom: 0px;
   right: 0px;

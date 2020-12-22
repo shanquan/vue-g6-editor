@@ -1,6 +1,6 @@
 
-import eventBus from "@/utils/eventBus";
-import { uniqueId } from '@/utils'
+import eventBus from "../utils/eventBus";
+import { uniqueId } from '../utils'
 let startPoint = null
 let startItem = null
 let endPoint = {}
@@ -131,12 +131,15 @@ export default {
     onMouseover(e) {
         const item = e.item
         if (item && item.getType() === 'node') {
+            /**
+             * @ref see: https://www.yuque.com/antv/g6/smhvyn#c541e939
+             */
             if (e.target._attrs.isInPointOut && !this.hasTran) {
                 this.hasTran = true
-                e.target.transform([
-                    ['t', 0, 3],
-                    ['s', 1.2, 1.2],
-                ])
+                // e.target.transform([
+                //     ['t', 0, 3],
+                //     ['s', 1.2, 1.2],
+                // ])
             }
             this.graph.paint()
         }

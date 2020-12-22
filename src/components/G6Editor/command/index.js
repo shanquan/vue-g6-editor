@@ -1,4 +1,4 @@
-import { uniqueId } from '@/utils'
+import { uniqueId } from '../utils'
 class command {
     editor = null;
     undoList = []
@@ -7,7 +7,7 @@ class command {
         this.editor = editor;
     }
     executeCommand(key, datas) {
-        console.log(key, datas)
+        // console.log(key, datas)
         const list = []
         datas.map(data => {
             let model = data

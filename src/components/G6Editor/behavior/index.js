@@ -8,15 +8,15 @@ import keyboard from './keyboard'
 import mulitSelect from './mulit-select'
 import addMenu from './add-menu'
 
-const behavors = {
+let behavors = {
+    'select-node': selectNode,
+    'hover-edge': hoverEdge,
+    'mulit-select':mulitSelect,
+    'add-menu':addMenu,
     'hover-node': hoverNode,
     'add-edge': addLine,
     'drag-item': dragItem,
-    'select-node': selectNode,
-    'hover-edge': hoverEdge,
-    'keyboard':keyboard,
-    'mulit-select':mulitSelect,
-    'add-menu':addMenu
+    'keyboard':keyboard
 }
 
 export function initBehavors() {

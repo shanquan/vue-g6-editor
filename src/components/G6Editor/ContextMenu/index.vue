@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import eventBus from "@/utils/eventBus";
+import eventBus from "../utils/eventBus";
 export default {
   data() {
     return {
-      menus: [{ key: 1, name: "菜单1" }, { key: 2, name: "菜单2" }]
+      menus: [] //[{ key: 1, name: "菜单1" }, { key: 2, name: "菜单2" }]
     };
   },
   created() {
@@ -31,13 +31,13 @@ export default {
         menu.style.top = e.clientY + "px";
         menu.style.display = "block";
       });
-       eventBus.$on("mousedown", () => {
-        const menu = this.$refs.contextMenu;
-        menu.style.display = "none";
-      });
+      //  eventBus.$on("mousedown", () => {
+      //   const menu = this.$refs.contextMenu;
+      //   menu.style.display = "none";
+      // });
     },
     handleClick(item) {
-      alert(item.name);
+      // alert(item.name);
       const menu = this.$refs.contextMenu;
       menu.style.display = "none";
     }

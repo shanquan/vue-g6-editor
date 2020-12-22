@@ -3,17 +3,17 @@
     <div class="editor" >
       <context-menu />
       <!--toolbar-->
-      <toolbar />
+      <toolbar :mode="mode"/>
       <div style="height: 42px;"></div>
       <div class="bottom-container">
         <!--itempannel-->
-        <item-panel />
+        <item-panel :items="items" v-if="mode"/>
         <!--detailpannel-->
         <detail-panel />
         <!--miniMap-->
         <minimap />
         <!--page-->
-        <page :height="height" :width="width"  :data="data" />
+        <page :height="height" :width="width" :data="data" :mode="mode"/>
       </div>
     </div>
     <Flow />
@@ -21,15 +21,16 @@
 </template>
 
 <script>
-import Toolbar from "../Toolbar";
-import ItemPanel from "../ItemPanel";
-import DetailPanel from "../DetailPanel";
-import Minimap from "../Minimap";
-import Page from "../Page";
-import Flow from "../Flow"
-import ContextMenu from "../ContextMenu";
-import Editor from "@/components/Base/Editor";
-import command from "@/command";
+import Toolbar from "./Toolbar";
+import ItemPanel from "./ItemPanel";
+import DetailPanel from "./DetailPanel";
+import Minimap from "./Minimap";
+import Page from "./Page";
+import Flow from "./Flow"
+import ContextMenu from "./ContextMenu";
+import Editor from "./Base/Editor";
+import command from "./command";
+import eventBus from "./utils/eventBus";
 export default {
   name: "G6Editor",
   components: {
@@ -50,9 +51,17 @@ export default {
       type: Number,
       default: document.documentElement.clientWidth
     },
+    mode: {
+      type: Number,
+      default: 0
+    },
     data: {
       type: Object,
       default: () => {}
+    },
+    items: {
+      type: Array,
+      default: () => []
     }
   },
   created() {
@@ -68,6 +77,9 @@ export default {
     init() {
       this.editor = new Editor();
       this.command = new command(this.editor);
+      eventBus.$on('saveModel',model=>{
+        this.$emit('save',model);
+      });
     }
   }
 };

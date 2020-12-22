@@ -1,5 +1,5 @@
 import { merge, isString } from 'lodash';
-import eventBus from "@/utils/eventBus";
+import eventBus from "../utils/eventBus";
 const delegateStyle = {
   fill: '#F3F9FF',
   fillOpacity: 0.5,
