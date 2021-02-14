@@ -1,5 +1,5 @@
 
-import Util from '@antv/g6/src/util'
+import * as Util from '@antv/util'
 import eventBus from "../utils/eventBus";
 export default {
     getEvents() {
@@ -28,7 +28,7 @@ export default {
         const graph = self.graph;
         const group = item.getContainer()
         group.find(g => {
-            if (g._attrs.isInPoint || g._attrs.isOutPoint) {
+            if (g.attrs.isInPoint || g.attrs.isOutPoint) {
                 g.attr("fill", "#fff")
             }
         });

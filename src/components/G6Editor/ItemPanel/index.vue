@@ -15,7 +15,7 @@
         :data-shape="item.shape"
         :data-type="item.type"
         :data-size="item.size"
-        draggable
+        :draggable="item.draggable"
         @dragstart="handleDragstart"
         @dragend="handleDragEnd($event,item)"
       >
@@ -133,4 +133,7 @@ export default {
   margin-right: 8px;
 }
 .itempannel .el-input{margin-bottom:8px}
+.getItem[draggable="false"]{
+  cursor: default!important;
+}
 </style>

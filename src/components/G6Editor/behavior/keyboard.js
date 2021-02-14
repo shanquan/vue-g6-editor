@@ -18,7 +18,9 @@ export default {
         switch (code) {
             case this.deleteKeyCode:
             case this.backKeyCode:
-                // eventBus.$emit('deleteItem')
+                if(e.target.tagName.toLowerCase()=='body'){
+                    eventBus.$emit('deleteItem')
+                }
                 break
         }
     },

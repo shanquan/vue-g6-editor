@@ -1,4 +1,5 @@
 import { uniqueId } from '../utils'
+import eventBus from "../utils/eventBus";
 class command {
     editor = null;
     undoList = []
@@ -57,13 +58,19 @@ class command {
         }
     }
     add(type, item) {
-        this.editor.add(type, item)
+        this.editor.add(type, item);
+        if(item.type === 'node'){
+            eventBus.$emit('nodeChange',this.editor.graph.save())
+        }
     }
     update(item, model) {
         this.editor.update(item, model)
     }
     remove(item) {
         this.editor.remove(item)
+        if(item.type === 'node'){
+            eventBus.$emit('nodeChange',this.editor.graph.save())
+        }
     }
     undo() {
         const undoData = this.undoList.pop()

@@ -34,16 +34,21 @@ export default {
     if (!this.shouldBegin.call(this, e)) {
       return;
     }
-    this.isDrag = true
+    this.isDrag=true;
     this.nodeEvent = e
     const { item } = e;
+    if(!item){
+      this.isDrag = false;
+      this.origin = null;
+      this.nodeEvent = null;
+      this.graph.setMode('default');
+      return;
+    }
     const graph = this.graph;
-
     this.targets = [];
 
     // 获取所有选中的元素
     const nodes = graph.findAllByState('node', 'selected');
-
     const currentNodeId = item.get('id');
 
     // 当前拖动的节点是否是选中的节点
@@ -75,7 +80,6 @@ export default {
     this.originPoint = {};
   },
   onMousemove(e) {
-   
     if (!this.origin) {
      this.getNode(e)
     }

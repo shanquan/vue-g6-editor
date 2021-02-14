@@ -1,5 +1,5 @@
 export default {
-  "mode": 0,
+  "mode": 1,
   "nodes": [
     {
       "label": "测试节点1",
@@ -8,7 +8,7 @@ export default {
       "id": "node2"
     },
     {
-      "label": "测试节点2",
+      "label": "测试节点",
       "x": 179,
       "y": 278,
       "id": "node13"
@@ -18,15 +18,7 @@ export default {
     {
       "id": "edge74",
       "source": "node2",
-      "target": "node13",
-      "startPoint": {
-        "x": 97.5933734939759,
-        "y": 129.5
-      },
-      "endPoint": {
-        "x": 169.4066265060241,
-        "y": 260.5
-      }
+      "target": "node13"
     }
   ]
 }

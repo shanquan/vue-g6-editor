@@ -6,7 +6,7 @@
 
 
 <script>
-import G6 from "@antv/g6/build/g6";
+import G6 from "@antv/g6";
 import { initBehavors } from "../behavior";
 export default {
   data() {
@@ -99,6 +99,7 @@ export default {
         this.graph.setMode('default');
       }else{
         this.graph.setMode('readOnly');
+        this.graph.changeSize(this.graph.get("width")+200,this.graph.get("height"));
       }
     }
   }

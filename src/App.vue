@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <G6Editor :mode="mode" :data="data" :items="items" @save="onSave"></G6Editor>
+    <G6Editor :mode="mode" :data="data" :items="items" @nodeChange="onNodeChange" @save="onSave"></G6Editor>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ const nodeEx = {
   color: "#1890ff",
   image: process.env.BASE_URL+"images/start.svg"
 }
+const pos = [{x:-85,y:0},{x:0,y:-17},{x:85,y:0},{x:0,y:17}]
 export default {
   name: 'app',
   components:{G6Editor},
@@ -44,15 +45,18 @@ export default {
         })
       }
       if(data.edges&&data.edges.length){
-        data.edges = data.edges.map(it=>{
+        data.edges = data.edges.filter(it=>it.source!=it.target).map(it=>{
           Object.assign(it,{
+            start: pos[it.start],
+            end: pos[it.end],
             shape: "customEdge"
           })
           return it;
         })
       }
-      this.mode = data.mode||0;
-      this.data = data.nodes&&data.nodes.length?data:null;
+      this.mode = data.mode || 0;
+      this.data = data;
+      this.onNodeChange(this.data);
     },
     getItems(){
       // fetch your items
@@ -60,10 +64,28 @@ export default {
         Object.assign(el,nodeEx)
         return el;
       })
+      this.onNodeChange();
     },
     onSave(model){
+      model.edges = model.edges.filter(it=>it.source!=it.target).map(el=>{
+        el.start = pos.findIndex(it=>it.x==el.start.x&&it.y==el.start.y);
+        el.end = pos.findIndex(it=>it.x==el.end.x&&it.y==el.end.y);
+        return el
+      })
       console.log(model);
       // send the model to server
+    },
+    onNodeChange(data){
+      // 画布已有节点，不能再添加
+      data = data?data:this.data;
+      if(this.items&&this.items.length)
+      this.items = this.items.map(el=>{
+        let findNode;
+        if(data&&data.nodes&&data.nodes.length)
+        findNode = data.nodes.find(it=>it.label==el.label);
+        el.draggable = !findNode;
+        return el;
+      })
     }
   }
 }

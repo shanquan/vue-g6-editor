@@ -80,6 +80,9 @@ export default {
       eventBus.$on('saveModel',model=>{
         this.$emit('save',model);
       });
+      eventBus.$on('nodeChange',data=>{
+        this.$emit('nodeChange',data);
+      });
     }
   }
 };

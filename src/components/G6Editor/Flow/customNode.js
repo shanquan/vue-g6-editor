@@ -1,6 +1,6 @@
-import G6 from "@antv/g6/build/g6";
+import G6 from "@antv/g6";
 import { uniqueId } from '../utils'
-import Shape from '@antv/g/src/shapes'
+import Shape from '@antv/g-canvas/lib/shape'
 const customNode = {
   init() {
     G6.registerNode("customNode", {
@@ -216,10 +216,10 @@ const customNode = {
         const shape = group.get("children")[0]; // 顺序根据 draw 时确定
 
         const children = group.findAll(g => {
-          return g._attrs.parent === shape._attrs.id
+          return g.attrs.parent === shape.attrs.id
         });
         const circles = group.findAll(circle => {
-          return circle._attrs.isInPoint || circle._attrs.isOutPoint;
+          return circle.attrs.isInPoint || circle.attrs.isOutPoint;
         });
         const selectStyles = () => {
           shape.attr("fill", "#f3f9ff");

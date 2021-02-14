@@ -42,7 +42,7 @@
 
 <script>
 import eventBus from "../utils/eventBus";
-import Grid from "@antv/g6/build/grid";
+import {Grid} from "@antv/g6";
 export default {
   data() {
     return {

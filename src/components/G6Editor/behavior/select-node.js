@@ -1,5 +1,5 @@
 
-import Util from '@antv/g6/src/util'
+import * as Util from '@antv/util'
 import eventBus from "../utils/eventBus";
 export default {
     getDefaultCfg() {
