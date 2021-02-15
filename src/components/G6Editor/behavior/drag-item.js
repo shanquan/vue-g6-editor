@@ -25,8 +25,8 @@ export default {
       'mousemove': 'onMousemove',
       'mouseup': 'onMouseup',
       // 'node:dragstart': 'onDragStart',
-      // 'node:drag': 'onDrag',
-      // 'node:dragend': 'onDragEnd',
+      'drag': 'onDrag',
+      'dragend': 'onDragEnd',
       'canvas:mouseleave': 'onOutOfRange'
     };
   },
@@ -37,13 +37,6 @@ export default {
     this.isDrag=true;
     this.nodeEvent = e
     const { item } = e;
-    if(!item){
-      this.isDrag = false;
-      this.origin = null;
-      this.nodeEvent = null;
-      this.graph.setMode('default');
-      return;
-    }
     const graph = this.graph;
     this.targets = [];
 
@@ -78,6 +71,12 @@ export default {
 
     this.point = {};
     this.originPoint = {};
+  },
+  onDrag(e){
+    this.onMousemove(e);
+  },
+  onDragEnd(e){
+    this.onMouseup(e);
   },
   onMousemove(e) {
     if (!this.origin) {
