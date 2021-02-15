@@ -25,8 +25,8 @@ export default {
       'mousemove': 'onMousemove',
       'mouseup': 'onMouseup',
       // 'node:dragstart': 'onDragStart',
-      'drag': 'onDrag',
-      'dragend': 'onDragEnd',
+      'drag': 'onMousemove',
+      'dragend': 'onMouseup',
       'canvas:mouseleave': 'onOutOfRange'
     };
   },
@@ -71,12 +71,6 @@ export default {
 
     this.point = {};
     this.originPoint = {};
-  },
-  onDrag(e){
-    this.onMousemove(e);
-  },
-  onDragEnd(e){
-    this.onMouseup(e);
   },
   onMousemove(e) {
     if (!this.origin) {
