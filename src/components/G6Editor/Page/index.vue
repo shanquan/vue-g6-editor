@@ -114,3 +114,6 @@ export default {
   margin-left:200px;
 }
 </style>
+<style>
+.g6-grid-container{inset:0!important}
+</style>
