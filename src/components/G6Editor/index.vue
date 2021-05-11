@@ -78,7 +78,10 @@ export default {
       this.editor = new Editor();
       this.command = new command(this.editor);
       eventBus.$on('saveModel',model=>{
-        this.$emit('save',model);
+        this.$emit('save',{
+          graph: this.editor.graph,
+          model: model
+        });
       });
       eventBus.$on('nodeChange',data=>{
         this.$emit('nodeChange',data);
