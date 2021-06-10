@@ -7,7 +7,7 @@
       <div style="height: 42px;"></div>
       <div class="bottom-container">
         <!--itempannel-->
-        <item-panel :items="items" v-if="mode"/>
+        <item-panel :items="items" v-show="mode"/>
         <!--detailpannel-->
         <detail-panel />
         <!--miniMap-->
